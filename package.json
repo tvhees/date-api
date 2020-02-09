@@ -1,0 +1,26 @@
+{
+  "name": "date-api",
+  "version": "1.0.0",
+  "description": "API for calculating the differences between two datetime parameters",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^25.1.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tvhees/date-api.git"
+  },
+  "author": "Torbjorn van Heeswijck",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tvhees/date-api/issues"
+  },
+  "homepage": "https://github.com/tvhees/date-api#readme"
+}
