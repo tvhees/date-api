@@ -36,7 +36,7 @@ dapi.daysBetween(dateA, dateB, 'minutes') // Returns the number of whole days be
 
 Differing timezones can be adjusted for using UTC offsets:
 ```javascript
-dapi.daysBetween('3:42:59 10/02/2020 +10:30', '12:20:00 15/02/2020 -05:30') // Returns the number of whole days between two dates converted to minutes
+dapi.daysBetween('3:42:59 10/02/2020 +10:30', '12:20:00 15/02/2020 -05:30') // Returns the number of whole days between two dates adjusted for UTC offset
 ```
 
 Tests can be run with the following command:
