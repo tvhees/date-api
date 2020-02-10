@@ -53,3 +53,24 @@ test('4 weeks from Christmas to Australia Day', () => {
 test('Weeks between: order of dates does not change result', () => {
   expect(dapi.daysBetween(today, lastYear)).toBe(dapi.daysBetween(lastYear, today));
 });
+
+// Weekdays between two parameters
+test('4 weekdays from Monday to Friday', () => {
+  expect(dapi.weekdaysBetween(monday, friday)).toBe(4);
+});
+
+test('3 weekdays from Friday to Wednesday next week', () => {
+  expect(dapi.weekdaysBetween(friday, wednesdayNextWeek)).toBe(3);
+});
+
+test('12 weekdays from Monday to Wednesday in two weeks', () => {
+  expect(dapi.weekdaysBetween(monday, wednesdayTwoWeeksLater)).toBe(12);
+});
+
+test('22 weekdays from Christmas to Australia Day', () => {
+  expect(dapi.weekdaysBetween(christmas, australiaDay)).toBe(22);
+});
+
+test('Weekdays between: order of dates does not change result', () => {
+  expect(dapi.weekdaysBetween(today, lastYear)).toBe(dapi.weekdaysBetween(lastYear, today));
+});

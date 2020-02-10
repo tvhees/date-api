@@ -20,4 +20,16 @@ function weeksBetween(a, b) {
   return Math.abs(dateA.diff(dateB, 'week'));
 }
 
-module.exports = {daysBetween, weeksBetween};
+function weekendDaysBetween(a, b) {
+  var dateAWeekStart = dayjs(a, dateFormat).startOf('week');
+  var dateBWeekStart = dayjs(b, dateFormat).startOf('week');
+  var weekendDaysPerWeek = 2;
+
+  return Math.abs(dateAWeekStart.diff(dateBWeekStart, 'week')) * weekendDaysPerWeek;
+}
+
+function weekdaysBetween(a, b) {
+  return daysBetween(a, b) - weekendDaysBetween(a, b);
+}
+
+module.exports = {daysBetween, weeksBetween, weekdaysBetween};
