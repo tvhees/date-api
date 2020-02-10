@@ -4,20 +4,39 @@ var customParseFormat = require('dayjs/plugin/customParseFormat');
 dayjs.extend(customParseFormat);
 
 var dateFormat = 'H:mm:ss D/MM/YYYY';
+var conversionFactors = {
+  seconds: 86400,
+  minutes: 1440,
+  hours: 24,
+  days: 1,
+  years: 1/365
+};
 
-function daysBetween(a, b) {
-  var dateA = dayjs(a, dateFormat);
-  var dateB = dayjs(b, dateFormat);
-
-  // Return the absolute number of days - spec doesn't require 
-  return Math.abs(dateA.diff(dateB, 'day'));
+function convertDaysTo(days, convertTo) {
+  if (conversionFactors[convertTo] === undefined) {
+    throw new Error('Unknown conversion unit specified: ' + convertTo);
+    return NaN;
+  } else {
+    return days * conversionFactors[convertTo];
+  }
 }
 
-function weeksBetween(a, b) {
+function daysBetween(a, b, convertTo = 'days') {
   var dateA = dayjs(a, dateFormat);
   var dateB = dayjs(b, dateFormat);
+  var days = Math.abs(dateA.diff(dateB, 'day'));
 
-  return Math.abs(dateA.diff(dateB, 'week'));
+  return convertDaysTo(days, convertTo);
+}
+
+function weeksBetween(a, b, convertTo = 'weeks') {
+  var dateA = dayjs(a, dateFormat);
+  var dateB = dayjs(b, dateFormat);
+  var weeks = Math.abs(dateA.diff(dateB, 'week'));
+  var daysInAWeek = 7;
+
+  return convertTo === 'weeks' ? weeks
+    : convertDaysTo(weeks * daysInAWeek, convertTo);
 }
 
 function weekendDaysBetween(a, b) {
@@ -28,8 +47,10 @@ function weekendDaysBetween(a, b) {
   return Math.abs(dateAWeekStart.diff(dateBWeekStart, 'week')) * weekendDaysPerWeek;
 }
 
-function weekdaysBetween(a, b) {
-  return daysBetween(a, b) - weekendDaysBetween(a, b);
+function weekdaysBetween(a, b, convertTo = 'days') {
+  var weekdays = daysBetween(a, b) - weekendDaysBetween(a, b);
+  
+  return convertDaysTo(weekdays, convertTo);
 }
 
 module.exports = {daysBetween, weeksBetween, weekdaysBetween};

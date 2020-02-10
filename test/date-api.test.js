@@ -80,3 +80,32 @@ test('22 weekdays from Christmas to Australia Day', () => {
 test('Weekdays between: order of dates does not change result', () => {
   expect(dapi.weekdaysBetween(today, lastYear)).toBe(dapi.weekdaysBetween(lastYear, today));
 });
+
+// Conversion to other units
+test('86400 seconds between today and tomorrow', () => {
+  expect(dapi.daysBetween(today, tomorrow, 'seconds')).toBe(86400);
+});
+
+test('1140 minutes between today and tomorrow', () => {
+  expect(dapi.daysBetween(today, tomorrow, 'minutes')).toBe(1440);
+});
+
+test('8760 hours in a year', () => {
+  expect(dapi.daysBetween(today, lastYear, 'hours')).toBe(8760);
+});
+
+test('41760 minutes in february of a leap year', () => {
+  expect(dapi.daysBetween(firstFebLeapYear, firstMarchLeapYear, 'minutes')).toBe(41760);
+});
+
+test('1209600 seconds in complete weeks from Monday to Wednesday in two weeks', () => {
+  expect(dapi.weeksBetween(monday, wednesdayTwoWeeksLater, 'seconds')).toBe(1209600);
+});
+
+test('Approximately 0.06 years from Christmas to Australia Day', () => {
+  expect(dapi.weekdaysBetween(christmas, australiaDay, 'years')).toBeCloseTo(0.06);
+});
+
+test('Unknown conversion unit throws error', () => {
+  expect(() => dapi.weekdaysBetween(christmas, australiaDay, 'turtles')).toThrow(Error);
+});
