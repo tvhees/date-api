@@ -9,6 +9,8 @@ const today="12:00:00 9/02/2020";
 const tomorrow = "12:00:00 10/02/2020";
 const notQuiteTomorrow = "11:59:59 10/02/2020";
 const lastYear = "12:00:00 9/02/2019";
+const firstFebLeapYear = "12:00:00 1/02/2020";
+const firstMarchLeapYear = "12:00:00 1/03/2020";
 
 test('1 day between today and tomorrow', () => {
   expect(dapi.daysBetween(today, tomorrow)).toBe(1);
@@ -20,6 +22,10 @@ test('0 days between today and 1 second before tomorrow', () => {
 
 test('365 days in a year', () => {
   expect(dapi.daysBetween(today, lastYear)).toBe(365);
+});
+
+test('29 days in february of a leap year', () => {
+  expect(dapi.daysBetween(firstFebLeapYear, firstMarchLeapYear)).toBe(29);
 });
 
 test('Days between: order of dates does not change result', () => {
