@@ -9,9 +9,15 @@ function daysBetween(a, b) {
   var dateA = dayjs(a, dateFormat);
   var dateB = dayjs(b, dateFormat);
 
-  // Return the absolute number of days
-  // - spec does not as
+  // Return the absolute number of days - spec doesn't require 
   return Math.abs(dateA.diff(dateB, 'day'));
 }
 
-module.exports = {daysBetween};
+function weeksBetween(a, b) {
+  var dateA = dayjs(a, dateFormat);
+  var dateB = dayjs(b, dateFormat);
+
+  return Math.abs(dateA.diff(dateB, 'week'));
+}
+
+module.exports = {daysBetween, weeksBetween};
